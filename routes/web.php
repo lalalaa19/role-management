@@ -8,9 +8,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::resource('roles', RoleController::class);
 
-Route::match(['get', 'post'], '/register', [AuthController::class, 'register'])->name('auth.register');
-Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout'); // Use POST for logout
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/auth-register', [AuthController::class, 'register'])->name('auth.register');
+Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
