@@ -12,8 +12,8 @@ return new class extends Migration {
             $table->string('user_nik', 16)->unique();
             $table->string('user_name', 45)->nullable();
             $table->string('user_email', 45)->nullable()->unique();
-            $table->string('user_personal_email')->nullable();
-            $table->string('user_password', 255);
+            $table->string('user_personal_email', 45);
+            $table->string('user_password', 45)->nullable();
             $table->date('user_birthday')->nullable();
             $table->string('user_phone', 45)->nullable();
             $table->text('user_address')->nullable();
@@ -30,10 +30,10 @@ return new class extends Migration {
             $table->date('user_contract_end')->nullable();
             $table->date('user_permanent_date')->nullable();
             $table->date('user_resign_date')->nullable();
-            $table->text('user_resign_detail')->nullable();
-            $table->text('user_work_experience')->nullable();
-            $table->text('user_ava')->nullable();
-            $table->enum('user_gender', ['Male', 'Female']);
+            $table->text('user_resign_detail');
+            $table->text('user_work_experience');
+            $table->text('user_ava');
+            $table->string('user_gender', 6);
             $table->string('user_lead', 50)->nullable();
             $table->string('user_refferal', 50)->nullable();
             $table->string('role_role_id', 45)->default('RL005');
@@ -46,11 +46,16 @@ return new class extends Migration {
             $table->string('user_bank_account', 50)->nullable();
             $table->timestamps();
             $table->rememberToken();
-
+        
             // Foreign Key ke role
             $table->foreign('role_role_id')->references('role_id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
-
+        
+            // Index sesuai dengan query yang kamu berikan
+            $table->index('role_role_id');
+            $table->index('user_grade_id');
+            $table->index('user_status');
         });
+        
     }
 
     public function down()

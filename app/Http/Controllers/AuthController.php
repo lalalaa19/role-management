@@ -38,7 +38,7 @@ class AuthController extends Controller
 
     // Simpan user baru
     $user = new User();
-    $user->user_id = (string) Str::uuid(); // ✅ Buat ID unik
+    $user->user_id = (string) Str::uuid(); 
     $user->user_email = $request->input('user_email');
     $user->user_name = $request->input('user_name');
     $user->user_password = Hash::make($request->input('user_password'));
@@ -90,7 +90,7 @@ class AuthController extends Controller
             'user_name' => $user->user_name,
             'isLoggedIn' => true,
         ];
-        session($data); // ✅ Perbaikan session
+        session($data); 
 
         return true;
     }

@@ -19,4 +19,9 @@ class Role extends Model
         'role_id',
         'role_name',
     ];
+    public function actions()
+    {
+        return $this->hasMany(Action::class, 'role_role_id', 'role_id');
+    }    
+    
 }
