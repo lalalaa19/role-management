@@ -4,7 +4,6 @@
 <div class="container">
     <h2>Add New Role</h2>
     
-    {{-- Tampilkan error jika ada --}}
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

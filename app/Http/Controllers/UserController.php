@@ -114,17 +114,11 @@ class UserController extends Controller
         $validated['user_leave'] = $validated['user_leave'] ?? '1';
         $validated['role_role_id'] = $validated['role_role_id'] ?? 'RL005';
 
-        // Handle file upload for user_ava if it's a file
+        // Handle file upload for user_ava 
         if ($request->hasFile('user_ava')) {
             $path = $request->file('user_ava')->store('avatars', 'public');
             $validated['user_ava'] = $path;
         }
-
-        // Hash password if provided
-        // if (isset($validated['user_password'])) {
-        //     $validated['user_password'] = Hash::make($validated['user_password']);
-        // }
-
 
         try {
             User::create($validated);
@@ -148,7 +142,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
-            // Required fields (NOT NULL in database)
+            
             'user_nik' => 'required|string|max:16|unique:users,user_nik,' . $user->user_id . ',user_id',
             'user_personal_email' => 'required|email|max:45',
             'user_medical' => 'required|string|max:45',
@@ -163,7 +157,7 @@ class UserController extends Controller
             // Nullable fields
             'user_name' => 'nullable|string|max:45',
             'user_email' => 'nullable|email|max:45|unique:users,user_email,' . $user->user_id . ',user_id',
-            // 'user_password' => 'nullable|string|max:45',
+            'user_password' => 'nullable|string|max:45',
             'user_birthday' => 'nullable|date',
             'user_phone' => 'nullable|string|max:45',
             'user_address' => 'nullable|string',

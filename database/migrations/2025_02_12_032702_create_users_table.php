@@ -50,7 +50,7 @@ return new class extends Migration {
             // Foreign Key ke role
             $table->foreign('role_role_id')->references('role_id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
         
-            // Index sesuai dengan query yang kamu berikan
+            // Index sesuai dengan query
             $table->index('role_role_id');
             $table->index('user_grade_id');
             $table->index('user_status');
