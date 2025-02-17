@@ -56,14 +56,15 @@
         @endif
 
         @yield('content')
+        
+        <!-- Footer -->
+        <footer class="bg-light text-center py-3 mt-5">
+            <div class="container">
+                <p>&copy; {{ date('Y') }} Laravel CRUD Dashboard. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-light text-center py-3 mt-5">
-        <div class="container">
-            <p>&copy; {{ date('Y') }} Laravel CRUD Dashboard. All rights reserved.</p>
-        </div>
-    </footer>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

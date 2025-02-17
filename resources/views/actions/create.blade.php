@@ -13,7 +13,7 @@
             <label for="action_status">Action Status</label>
             <input type="text" name="action_status" class="form-control" required>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="role_role_id">Role</label>
             <select name="role_role_id" class="form-control" required>
                 @foreach($roles as $role)

@@ -32,9 +32,9 @@ class ActionController extends Controller
         return redirect()->route('actions.index')->with('success', 'Action added successfully!');
     }
 
-    public function show(Role $role)
+    public function show(Action $action)
     {
-        return view('actions.show', compact('role'));
+        return view('actions.show', compact('action'));
     }
 
     public function edit($id)

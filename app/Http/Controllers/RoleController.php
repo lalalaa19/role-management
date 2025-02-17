@@ -25,7 +25,7 @@ class RoleController extends Controller
         ]);
     
         $role = Role::create([
-            'role_id' => 'RL' . rand(100, 999), // Generate role_id otomatis
+            'role_id' => 'RL' . rand(100, 999),
             'role_name' => $validated['role_name'],
         ]);
     
@@ -58,6 +58,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('roles.index')->with('success', 'Role berhasil dihapus.');
+        return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
     }
 }
