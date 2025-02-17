@@ -53,7 +53,7 @@
                                         @error('user_password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> 
 
                                     <div class="mb-3">
                                         <label for="user_password_confirmation" class="form-label">Confirm Password</label>

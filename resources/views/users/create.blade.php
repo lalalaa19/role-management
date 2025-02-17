@@ -10,10 +10,8 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">User Information Form</h2>
-        <form action="/users" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('users.store') }}" method="POST">
             @csrf
-            
-
             <!-- Personal Information Section -->
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
@@ -53,13 +51,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="mb-3">
                             <label for="user_password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="user_password" name="user_password">
+                            <input type="password" class="form-control @error('user_password') is-invalid @enderror" 
+                                   id="user_password" name="user_password" placeholder="Enter password">
                             @error('user_password')
-                                <div class="text-danger">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> 
                         <div class="col-md-6 mb-3">
                             <label for="user_birthday" class="form-label">Birthday</label>
                             <input type="date" class="form-control" id="user_birthday" name="user_birthday">
@@ -204,7 +203,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="user_type" class="form-label">User Type</label>
-                            <input type="text" name="user_type" value="{{ old('user_type', $user->user_type ?? 'Customer') }}">
+                            <input type="text" name="user_type" value="{{ old('user_type', $user->user_type ?? 'Customer') }}">
                             @error('user_type')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -281,7 +280,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="user_leave" class="form-label">Leave</label>
-                            <input type="text" name="user_leave" value="{{ old('user_leave', $user->user_leave ?? '1') }}">
+                            <input type="text" name="user_leave" value="{{ old('user_leave', $user->user_leave ?? '1') }}">
                            
                             @error('user_leave')
                                 <div class="text-danger">{{ $message }}</div>

@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->text('user_ava');
             $table->string('user_gender', 6);
             $table->string('user_lead', 50)->nullable();
-            $table->string('user_refferal', 50)->nullable();
+            $table->string('user_referral', 50)->nullable();
             $table->string('role_role_id', 45)->default('RL005');
             $table->string('user_passport', 100)->nullable();
             $table->date('user_passport_date')->nullable();

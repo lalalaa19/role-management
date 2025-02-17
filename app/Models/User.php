@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,9 @@ class User extends Authenticatable
      * @var list<string>
      */
 
-    protected $primaryKey = 'user_id';
-    public $incrementing = false; 
-    protected $keyType = 'string';
+     protected $primaryKey = 'user_id';
+     public $incrementing = false;
+     protected $keyType = 'string';
 
 
     protected $fillable = [
@@ -50,7 +51,7 @@ class User extends Authenticatable
         'user_resign_detail',
         'user_work_experience',
         'user_employee_id',
-        'user_type' => 'Customer',
+        // 'user_type' => 'Customer',
         'user_status',
 
         // Emergency Contact
@@ -61,7 +62,7 @@ class User extends Authenticatable
         // Medical details
         'user_blood_type',
         'user_medical',
-        'user_leave' => '1',
+        // 'user_leave' => '1',
 
         // Financial & docs
         'user_bank_account',
@@ -70,10 +71,17 @@ class User extends Authenticatable
         'user_passport_details',
 
         // Roles & permission
-        'role_role_id' => 'RL005',
+        // 'role_role_id' => 'RL005',
         'user_lead',
-        'user_refferal'
+        'user_referral'
     ];
+
+    protected $attributes = [
+        'user_type' => 'Customer',
+        'user_leave' => '1',
+        'role_role_id' => 'RL005',
+    ];
+    
 
 
     /**
@@ -86,6 +94,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // Hash password secara otomatis
+    public function setUserPasswordAttribute($value)
+    {
+        $this->attributes['user_password'] = Hash::make($value);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -95,7 +113,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            // 'password' => 'hashed',
+            'password' => 'hashed',
         ];
     }
 }

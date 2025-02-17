@@ -91,7 +91,7 @@
                         <h6>Roles & Permissions</h6>
                         <p><strong>Role ID:</strong> {{ $user->role_role_id ?? 'N/A' }}</p>
                         <p><strong>Lead:</strong> {{ $user->user_lead ?? 'N/A' }}</p>
-                        <p><strong>Referral:</strong> {{ $user->user_refferal ?? 'N/A' }}</p>
+                        <p><strong>Referral:</strong> {{ $user->user_referral ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>
