@@ -14,7 +14,7 @@ class ActionController extends Controller
         return view('actions.index', compact('actions'));
     }
 
-    public function create()
+    public function addUser()
     {
         $roles = Role::all();
         return view('actions.create', compact('roles'));

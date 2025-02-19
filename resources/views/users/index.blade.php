@@ -22,8 +22,10 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone</th>
+                <th>User Type</th>
                 <th>Status</th>
+                <th>Gender</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -33,8 +35,10 @@
                 <td>{{ $user->user_id }}</td>
                 <td>{{ $user->user_name }}</td>
                 <td>{{ $user->user_email }}</td>
-                <td>{{ $user->user_phone ?? 'N/A' }}</td>
-                <td>{{ $user->user_status ?? 'N/A' }}</td>
+                <td>{{ $user->user_type }}</td>
+                <td>{{ $user->user_status }}</td>
+                <td>{{ $user->user_gender }}</td>
+                <td>{{ $user->role_role_id }}</td>
                 <td>
                     <a href="{{ route('users.show', ['user' => $user->user_id]) }}" class="btn btn-info btn-sm">View</a>
                     <a href="{{ route('users.edit', ['user' => $user->user_id]) }}" class="btn btn-warning btn-sm">Edit</a>
