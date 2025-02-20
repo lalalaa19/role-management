@@ -14,52 +14,66 @@ class ActionController extends Controller
         return view('actions.index', compact('actions'));
     }
 
-    public function addUser()
+    public function addAction(Request $request)
     {
-        $roles = Role::all();
-        return view('actions.create', compact('roles'));
-    }
-
-    public function store(Request $request)
-    {
+        if ($request->isMethod('get')) {
+            $roles = Role::all();
+            return view('actions.addAction', compact('roles'));
+        }
+    
         $request->validate([
             'action_name' => 'required|max:50',
             'action_status' => 'required|max:10',
             'role_role_id' => 'required|exists:roles,role_id'
         ]);
-
-        Action::create($request->all());
+    
+        // Generate action_id dengan format ACT001
+        $latestAction = Action::latest('action_id')->first();
+        $nextId = $latestAction ? intval(substr($latestAction->action_id, 3)) + 1 : 1;
+        $actionId = 'ACT' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
+    
+        Action::create([
+            'action_id' => $actionId, // Pakai ID yang sudah digenerate
+            'action_name' => $request->action_name,
+            'action_status' => $request->action_status,
+            'role_role_id' => $request->role_role_id
+        ]);
         return redirect()->route('actions.index')->with('success', 'Action added successfully!');
     }
+    
 
-    public function show(Action $action)
+    public function viewAction(Request $request)
     {
-        return view('actions.show', compact('action'));
+        $action_id = $request->query('action_id');
+        $action = Action::where('action_id', $action_id)->firstOrFail();
+        return view('actions.viewAction', compact('action'));
     }
 
-    public function edit($id)
+    public function editAction(Request $request)
     {
-        $action = Action::findOrFail($id);
+        $action_id = $request->query('action_id');
+        $action = Action::where('action_id', $action_id)->firstOrFail();
         $roles = Role::all();
-        return view('actions.edit', compact('action', 'roles'));
-    }
-
-    public function update(Request $request, $id)
-    {
+    
+        if ($request->isMethod('get')) {
+            return view('actions.editAction', compact('action', 'roles'));
+        }
+    
         $request->validate([
             'action_name' => 'required|max:50',
             'action_status' => 'required|max:10',
             'role_role_id' => 'required|exists:roles,role_id'
         ]);
-
-        $action = Action::findOrFail($id);
+    
         $action->update($request->all());
         return redirect()->route('actions.index')->with('success', 'Action updated successfully!');
     }
+    
 
-    public function destroy($id)
+    public function deleteAction(Request $request)
     {
-        $action = Action::findOrFail($id);
+        $action_id = $request->query('action_id');
+        $action = Action::where('action_id', $action_id)->firstOrFail();
         $action->delete();
         return redirect()->route('actions.index')->with('success', 'Action deleted successfully!');
     }

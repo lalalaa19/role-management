@@ -24,19 +24,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->uuid(),
-            'user_nik' => fake()->numerify('##############'), 
             'user_name' => fake()->name(), 
             'user_email' => fake()->unique()->safeEmail(), 
-            'user_personal_email' => 'personal@example.com',
-            'user_medical' => 'Healthy',
-            'user_grade_id' => 'GR001',
-            'user_resign_detail' => 'Tidak ada rencana resign',
-            'user_work_experience' => '1 tahun sebagai Software Engineer',
             'user_ava' => 'default.jpg',
             'user_gender' => 'Male',
-            'user_emergency_name' => 'John Doe',
-            'user_emergency_relationship' => 'Brother',
             'role_role_id' => 'RL005', 
             'remember_token' => Str::random(10),
         ];

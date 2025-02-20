@@ -36,8 +36,8 @@ class UserController extends Controller
             'user_password' => 'required|string|max:60',
             'user_type' => 'required|string|max:45',
             'user_status' => 'required|string|max:45',
-            'user_ava' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'user_gender' => 'nullable|string|max:6',
+            'user_ava' => 'required|nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_gender' => 'required|nullable|string|max:6',
             'user_lead' => 'nullable|string|max:50',
             'role_role_id' => 'nullable|string|max:50',
         ]);
@@ -85,7 +85,6 @@ class UserController extends Controller
         $validated = $request->validate([
             'user_name' => 'nullable|string|max:45',
             'user_email' => 'nullable|email|max:45|unique:users,user_email,' . $user->user_id . ',user_id',
-            'user_password' => 'nullable|string|max:60',
             'user_type' => 'nullable|string|max:45',
             'user_status' => 'nullable|string|max:45',
             'user_ava' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -93,6 +92,10 @@ class UserController extends Controller
             'user_lead' => 'nullable|string|max:50',
             'role_role_id' => 'nullable|string|max:50',
         ]);
+        
+        if ($request->filled('user_password')) {
+            $validated['user_password'] = Hash::make($request->user_password);
+        }
     
         if ($request->hasFile('user_ava')) {
             // Delete old avatar

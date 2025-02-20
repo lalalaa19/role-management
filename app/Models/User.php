@@ -38,6 +38,7 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
+        
         'user_type' => 'Customer',
         'role_role_id' => 'RL005',
     ];

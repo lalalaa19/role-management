@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4">Users</h1>
+    <h1 class="mb-2">Users</h1>
 
     <!-- Add New User Button -->
     <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add New User</a>

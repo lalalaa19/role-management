@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-3">
+<div class="container mt-1">
     <h1 class="text-center mb-3">Edit User</h1>
     <form action="{{ route('users.update', $user->user_id) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -34,7 +34,7 @@
 
             <div class="col-md-6 mb-3">
                 <label for="user_password">Password</label>
-                <input type="password" name="user_password" id="user_password" class="form-control" required>
+                <input type="password" name="user_password" id="user_password" class="form-control" >
                 @error('user_password')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -66,7 +66,7 @@
 
             <div class="col-md-6 mb-3">
                 <label for="user_gender" class="form-label">Gender</label>
-                <select class="form-select" id="user_gender" name="user_gender">
+                <select class="form-select" id="user_gender" name="user_gender" value="{{ old('user_gender', $user->user_gender) }}">
                     <option value="">Select Gender</option>
                     <option value="male" {{ old('user_gender', $user->user_gender) == 'male' ? 'selected' : '' }}>Male</option>
                     <option value="female" {{ old('user_gender', $user->user_gender) == 'female' ? 'selected' : '' }}>Female</option>
@@ -95,9 +95,9 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-center my-4">
-            <button type="submit" class="btn btn-primary">Update</button>
-        </div>
+        <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
+    
 </div>
 @endsection

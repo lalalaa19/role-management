@@ -13,50 +13,55 @@ class RoleController extends Controller
         return view('roles.index', compact('roles'));
     }
 
-    public function create()
+    public function addRole(Request $request)
     {
-        return view('roles.create');
-    }
-
-    public function store(Request $request)
-    {
+        if ($request->isMethod('get')) {
+            return view('roles.addRole');
+        }
+    
         $validated = $request->validate([
             'role_name' => 'required|string|max:255',
         ]);
     
-        $role = Role::create([
+        Role::create([
             'role_id' => 'RL' . rand(100, 999),
             'role_name' => $validated['role_name'],
         ]);
     
         return redirect()->route('roles.index')->with('success', 'Role added successfully!');
-    }    
+    }      
 
-    public function show(Role $role)
+    public function viewRole(Request $request)
     {
-        return view('roles.show', compact('role'));
+        $role_id = $request->query('role_id');
+
+        $role = Role::where('role_id', $role_id)->firstOrFail();
+        return view('roles.viewRole', compact('role'));
     }
 
-    public function edit($role_id)
+    public function editRole(Request $request)
     {
+        $role_id = $request->query('role_id');
         $role = Role::where('role_id', $role_id)->firstOrFail();
-        return view('roles.edit', compact('role'));
-    }    
-
-    public function update(Request $request, $role_id)
-    {
+        
+        if ($request->isMethod('get')) {
+            return view('roles.editRole', compact('role'));
+        }
+    
         $validated = $request->validate([
             'role_name' => 'required|string|max:255',
         ]);
     
-        $role = Role::where('role_id', $role_id)->firstOrFail();
         $role->update(['role_name' => $validated['role_name']]);
     
         return redirect()->route('roles.index')->with('success', 'Role updated successfully!');
-    }    
+    }
+    
 
-    public function destroy(Role $role)
+    public function deleteRole(Request $request)
     {
+        $role_id = $request->query('role_id');
+        $role = Role::where('role_id', $role_id)->firstOrFail();
         $role->delete();
         return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
     }

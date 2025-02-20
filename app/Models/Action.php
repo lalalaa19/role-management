@@ -11,9 +11,12 @@ class Action extends Model
 
     protected $table = 'actions';
     protected $primaryKey = 'action_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
     public $timestamps = true;
 
     protected $fillable = [
+        'action_id',
         'action_name',
         'action_status',
         'role_role_id'

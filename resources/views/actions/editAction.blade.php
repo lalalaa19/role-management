@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Action</h1>
-    <form action="{{ route('actions.update', $action->action_id) }}" method="POST">
+    <form action="{{ route('actions.editAction', $action->action_id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -16,13 +16,14 @@
         </div>
         <div class="form-group mb-2">
             <label for="role_role_id">Role</label>
-            <select name="role_role_id" class="form-control" required>
+            <select name="role_role_id" class="form-select" required>
                 @foreach($roles as $role)
                     <option value="{{ $role->role_id }}" {{ $action->role_role_id == $role->role_id ? 'selected' : '' }}>{{ $role->role_name }}</option>
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Update</button>
+        <a href="{{ route('actions.index') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
 </div>
 @endsection

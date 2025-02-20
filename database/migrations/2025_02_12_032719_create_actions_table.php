@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('actions', function (Blueprint $table) {
-            $table->bigIncrements('action_id');
+            $table->string('action_id', 10)->primary();
             $table->string('action_name', 50);
             $table->string('action_status', 10);
             $table->string('role_role_id', 45);
