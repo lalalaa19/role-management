@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-1">
     <h2 class="text-center mb-3">User Information Form</h2>
-    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('users.addUser') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -80,7 +80,7 @@
             </div>
         </div>
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
 @endsection

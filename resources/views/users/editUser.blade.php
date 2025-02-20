@@ -1,21 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-1">
+<div class="container mt-3">
     <h1 class="text-center mb-3">Edit User</h1>
-    <form action="{{ route('users.update', $user->user_id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('users.editUser', ['user_id' => $user->user_id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
-        
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="user_id">User ID</label>
-                <input type="text" name="user_id" id="user_id" value="{{ old('user_id', $user->user_id ?? 'Generating...') }}" class="form-control" readonly>
-                @error('user_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
             <div class="col-md-6 mb-3">
                 <label for="user_name">Name</label>
                 <input type="text" name="user_name" id="user_name" class="form-control" required value="{{ old('user_name', $user->user_name) }}">
@@ -34,7 +24,7 @@
 
             <div class="col-md-6 mb-3">
                 <label for="user_password">Password</label>
-                <input type="password" name="user_password" id="user_password" class="form-control" >
+                <input type="password" name="user_password" id="user_password" class="form-control">
                 @error('user_password')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -66,7 +56,7 @@
 
             <div class="col-md-6 mb-3">
                 <label for="user_gender" class="form-label">Gender</label>
-                <select class="form-select" id="user_gender" name="user_gender" value="{{ old('user_gender', $user->user_gender) }}">
+                <select class="form-select" id="user_gender" name="user_gender">
                     <option value="">Select Gender</option>
                     <option value="male" {{ old('user_gender', $user->user_gender) == 'male' ? 'selected' : '' }}>Male</option>
                     <option value="female" {{ old('user_gender', $user->user_gender) == 'female' ? 'selected' : '' }}>Female</option>
@@ -94,10 +84,9 @@
                 </select>
             </div>
         </div>
-
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
-        <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Save</button>
+        
     </form>
-    
 </div>
 @endsection

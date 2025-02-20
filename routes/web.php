@@ -26,7 +26,12 @@ Route::get('/actions/viewAction/index', [ActionController::class, 'viewAction'])
 Route::delete('/actions/deleteAction/index', [ActionController::class, 'deleteAction'])->name('actions.deleteAction');
 
 
-Route::resource('users', UserController::class);
+// User
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::match(['get', 'post'], '/users/addUser', [UserController::class, 'addUser'])->name('users.addUser');
+Route::get('users/viewUser/index', [UserController::class, 'viewUser'])->name('users.viewUser');
+Route::match(['get', 'post'], 'users/editUser/index', [UserController::class, 'editUser'])->name('users.editUser');
+Route::post('users/deleteUser', [UserController::class, 'deleteUser'])->name('users.deleteUser');
 
 // Route::get('/register', [AuthController::class, 'register'])->name('register');
 // Route::post('/register', [AuthController::class, 'register']);
